@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.779
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LadeskabCore", "LadeskabCore\LadeskabCore.csproj", "{B4B4301A-01DE-48B8-9839-A995018BFC46}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LadeskabCoreTest", "LadeskabCoreTest\LadeskabCoreTest.csproj", "{E8F3F906-9BAC-49B2-A0DE-D3198A6F055C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LadeskabApp", "LadeskabApp\LadeskabApp.csproj", "{BA856FFA-0371-4D7F-941D-A2F0E59E385A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B4B4301A-01DE-48B8-9839-A995018BFC46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4B4301A-01DE-48B8-9839-A995018BFC46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4B4301A-01DE-48B8-9839-A995018BFC46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4B4301A-01DE-48B8-9839-A995018BFC46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8F3F906-9BAC-49B2-A0DE-D3198A6F055C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8F3F906-9BAC-49B2-A0DE-D3198A6F055C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8F3F906-9BAC-49B2-A0DE-D3198A6F055C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8F3F906-9BAC-49B2-A0DE-D3198A6F055C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA856FFA-0371-4D7F-941D-A2F0E59E385A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA856FFA-0371-4D7F-941D-A2F0E59E385A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA856FFA-0371-4D7F-941D-A2F0E59E385A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA856FFA-0371-4D7F-941D-A2F0E59E385A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C5DF7213-A11F-4965-BB21-38B29B454243}
+	EndGlobalSection
+EndGlobal
