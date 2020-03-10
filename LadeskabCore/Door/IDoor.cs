@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace LadeskabCore.Door
 {
-    class IDoor
+    public interface IDoor
     {
+        void Run();
+
+        void Lock(bool newstatus);
+
+        void Unlock(bool newstatus);
+
+        event EventHandler<DoorTriggeredEventArgs> DoorChangedEvent;
     }
 }
