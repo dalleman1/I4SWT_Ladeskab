@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChargeControl\IChargeControl.cs" />
+    <Compile Include="ChargeControl\ChargeControl.cs" />
     <Compile Include="Door\IDoor.cs" />
     <Compile Include="Door\DoorTriggeredEventArgs.cs" />
     <Compile Include="Door\Door.cs" />
@@ -56,12 +58,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StationControl\IStationControl.cs" />
     <Compile Include="StationControl\StationControl.cs" />
+    <Compile Include="USBCharger\IUSBCharger.cs" />
+    <Compile Include="USBCharger\USBCharger.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ChargeControl\" />
     <Folder Include="Display\" />
     <Folder Include="LogFile\" />
   </ItemGroup>

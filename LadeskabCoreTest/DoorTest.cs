@@ -8,14 +8,22 @@ using NUnit.Framework;
 namespace LadeskabCoreTest
 {
     [TestFixture]
-    public class LadeskabCoreTest
+    public class DoorTest
     {
-        [Test]
-        public void printtest()
+        [SetUp] public void Init()
         {
-            Assert.That(0, Is.EqualTo(0));
+
         }
 
-    }
+        [TearDown] public void Cleanup()
+        {
 
+
+        }
+
+        [Test] public void test()
+        {
+
+        }
+    }
 }
