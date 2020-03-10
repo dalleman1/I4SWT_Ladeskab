@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace LadeskabCore.Door
 {
-    class IDoor
+    public interface IDoor
     {
+        void Lock();
+
+        void Unlock();
     }
 }

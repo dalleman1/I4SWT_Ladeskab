@@ -15,5 +15,6 @@
         void LockDoor();
 
         void UnlockDoor();
-  
+    }
+
 }
