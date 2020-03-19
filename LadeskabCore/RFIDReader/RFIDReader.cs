@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LadeskabCore.RFIDReader
 {
-    class RFIDReader : IRFIDReader
+    public class RFIDReader : IRFIDReader
     {
         public event EventHandler<RFIDDetectedEventsArgs> RaiseDetectEvent;
 
