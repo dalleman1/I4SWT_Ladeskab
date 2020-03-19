@@ -7,7 +7,7 @@
         void RemovePhone();
 
         void InsertRFID();
-
+        
         void ConnectionError();
 
         void RFIDError();

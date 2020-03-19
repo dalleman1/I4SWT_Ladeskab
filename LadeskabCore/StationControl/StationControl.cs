@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Reflection.Emit;
+using System.Runtime.InteropServices;
 
 namespace LadeskabCore.StationControl
 {
@@ -20,16 +21,43 @@ namespace LadeskabCore.StationControl
             DoorOpen
         };
 
-        public StationControl(RFIDReader.RFIDReader publisher)
+        public StationControl(RFIDReader.RFIDReader RFIDPub, ChargeControl.ChargeControl CHARGEPub, Door.Door DoorPub)
         {
-            publisher.RaiseDetectEvent += HandleDetectEvent;
+            RFIDPub.RaiseDetectEvent += HandleDetectEventRFID;
+            CHARGEPub.RaisedChargeEvent += HandleDetectedEventCharge;
+            DoorPub.RaisedChargeEvent += HandleDetectEventDoor;
         }
 
-        private void HandleDetectEvent(object sender, EventArgs e)
+        private void HandleDetectEventDoor(object sender, EventArgs e)
+        {
+
+        }
+
+        private void HandleDetectEventRFID(object sender, EventArgs e)
         { 
             CheckID(_oldID,e.ID);
         }
 
+        private void HandleDetectedEventCharge(object sender, EventArgs e)
+        {
+            switch (e.state)
+            {
+                case Charging:
+                    display.Charging();
+                    break;
+                case FullyCharged:
+                    display.RemovePhone();
+                    break;
+                case NoConnection:
+                    display.ConnectionError();
+                    break;
+                case Error:
+                    Console.WriteLine("Phone not connected, please reconnect.");
+                    break;
+                default:
+                    break;
+            }
+        }
 
         public bool Isconnected()
         {
@@ -55,13 +83,13 @@ namespace LadeskabCore.StationControl
                     if (Isconnected())
                     {
                         UnlockDoor();
-                        StartCharge();
+                        display.ConnectPhone();
                         _oldID = ID;
                         using (var writer = File.AppendText("logFile")) //Replace "logFile" with actual Logfile class 
                         {
                             writer.WriteLine(DateTime.Now + ": Cabin locked with RFID: {0}", ID);
                         }
-                        ChargeMessage();
+                        display.Charging();
                         _state = CabinState.Locked;
                     }
                     else
@@ -103,15 +131,7 @@ namespace LadeskabCore.StationControl
             display.Charging();
         }
 
-        public void StartCharge()
-        {
-            charger.StartCharge();
-        }
-
-        public void StopCharge()
-        {
-            charger.StopCharge();
-        }
+        
 
         public void LockDoor()
         {

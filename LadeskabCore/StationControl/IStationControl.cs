@@ -8,10 +8,6 @@
 
         void ChargeMessage();
 
-        void StartCharge();
-
-        void StopCharge();
-
         void LockDoor();
 
         void UnlockDoor();
