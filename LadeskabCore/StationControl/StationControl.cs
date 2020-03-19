@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Reflection.Emit;
 
 namespace LadeskabCore.StationControl
 {
@@ -18,6 +19,17 @@ namespace LadeskabCore.StationControl
             Locked,
             DoorOpen
         };
+
+        public StationControl(RFIDReader.RFIDReader publisher)
+        {
+            publisher.RaiseDetectEvent += HandleDetectEvent;
+        }
+
+        private void HandleDetectEvent(object sender, EventArgs e)
+        { 
+            CheckID(_oldID,e.ID);
+        }
+
 
         public bool Isconnected()
         {
@@ -109,6 +121,11 @@ namespace LadeskabCore.StationControl
         public void UnlockDoor()
         {
             door.Unlock();
+        }
+
+        static void main(string[] args)
+        {
+
         }
 
     }
