@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace LadeskabCore.RFIDReader
 {
-    class RFIDDetectedEventsArgs
+    class RFIDDetectedEventsArgs : EventArgs
     {
+        public RFIDDetectedEventsArgs(int id_)
+        {
+            ID = id_;
+        }
+        private int ID { get; }
     }
 }

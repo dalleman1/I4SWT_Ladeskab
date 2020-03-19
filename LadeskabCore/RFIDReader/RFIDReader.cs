@@ -6,7 +6,28 @@ using System.Threading.Tasks;
 
 namespace LadeskabCore.RFIDReader
 {
-    class RFIDReader
+    class RFIDReader : IRFIDReader
     {
+        public event EventHandler<RFIDDetectedEventsArgs> RaiseDetectEvent;
+
+        public void ThreadRun()
+        {
+            // This code receives a signal from a imaginary RFID-reader.
+            // When this signal is passed we trigger our RFIDDetectedEvent.
+            // Furthermore there is some id associated with the reader.
+            while (true)
+            {
+                OnDetectEvent(new RFIDDetectedEventsArgs(123));
+            }
+        }
+
+        protected virtual void OnDetectEvent(RFIDDetectedEventsArgs e)
+        {
+            EventHandler<RFIDDetectedEventsArgs> handler = RaiseDetectEvent;
+            if(handler != null)
+            {
+                handler(this, e);
+            }
+        }
     }
 }

@@ -4,10 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LadeskabCore.RFIDReader
+
+namespace LadeskabCore
 {
-    public interface IRFIDReader
+    interface ILogFile
     {
-        void ThreadRun();
+
+        void LogDoorLocked(int id);
+        void LogDoorUnlocked(int id);
     }
 }

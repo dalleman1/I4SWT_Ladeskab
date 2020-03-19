@@ -1,0 +1,50 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.IO;
+
+namespace LadeskabCore.LogFile
+{
+    class LogFile : ILogFile
+    {
+        private FileStream fs;
+        private string filePath;
+        public LogFile(string filePath_)
+        {
+            filePath = filePath_;
+        } 
+        public void LogDoorLocked(int id)
+        {
+            try
+            {
+                fs = File.Open(filePath, FileMode.Open, FileAccess.Write, FileShare.None);
+                Byte[] infoString = new UTF8Encoding(true).GetBytes(String.Format("RFID: {0} (LOCKED) @ {1}\n", id, DateTime.Now.ToString("HH:mm:ss")));
+
+                fs.Write(infoString, 0, infoString.Length);
+                fs.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+        }
+
+        public void LogDoorUnlocked(int id)
+        {
+            try
+            {
+                fs = File.Open(filePath, FileMode.Open, FileAccess.Write, FileShare.None);
+                Byte[] infoString = new UTF8Encoding(true).GetBytes(String.Format("RFID: {0} (UNLOCKED) @ {1}\n", id, DateTime.Now.ToString("HH:mm:ss")));
+
+                fs.Write(infoString, 0, infoString.Length);
+                fs.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+        }
+    }
+}

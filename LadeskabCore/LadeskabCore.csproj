@@ -50,6 +50,8 @@
     <Compile Include="Door\IDoor.cs" />
     <Compile Include="Door\DoorTriggeredEventArgs.cs" />
     <Compile Include="Door\Door.cs" />
+    <Compile Include="LogFile\ILogFile.cs" />
+    <Compile Include="LogFile\LogFile.cs" />
     <Compile Include="RFIDReader\RFIDDetectedEventArgs.cs" />
     <Compile Include="RFIDReader\RFIDReader.cs" />
     <Compile Include="RFIDReader\IRFIDReader.cs" />
@@ -61,7 +63,6 @@
   <ItemGroup>
     <Folder Include="ChargeControl\" />
     <Folder Include="Display\" />
-    <Folder Include="LogFile\" />
     <Folder Include="StationControl\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
