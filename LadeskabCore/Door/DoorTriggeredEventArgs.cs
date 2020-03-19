@@ -6,8 +6,19 @@ using System.Threading.Tasks;
 
 namespace LadeskabCore.Door
 {
+    public enum DoorStates
+    {
+        DoorUnlocked,
+        DoorLocked
+    }
+
     public class DoorTriggeredEventArgs : EventArgs
     {
-        public bool Status { get; set; }
+        private DoorStates _doorstate { get; set; }
+
+        public DoorTriggeredEventArgs(DoorStates state)
+        {
+            _doorstate = state;
+        }
     }
 }

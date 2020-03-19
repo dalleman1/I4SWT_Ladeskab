@@ -11,7 +11,7 @@ namespace LadeskabCore.ChargeControl
     {
         UsbChargerSimulator usb = new UsbChargerSimulator();
 
-        public double CurrentUSBValue { get; set; }
+        public event EventHandler<ChargeTriggeredEventArgs> RaisedChargeEvent;
 
         public ChargeControl(IUsbCharger usbCharger)
         {
@@ -20,26 +20,55 @@ namespace LadeskabCore.ChargeControl
 
         public void HandleChargeEvent(object sender, CurrentEventArgs e)
         {
-            CurrentUSBValue = e.Current;
-            //if (CurrentUSBValue != usb.Connected)
-            //{
+            if (e.Current == 0)
+            {
+                OnChargeEvent(new ChargeTriggeredEventArgs(ChargeStates.NoConnection));
 
-            //}
-            StartCharge();
+            }
+            if (e.Current <= 500 && e.Current > 5)
+            {
+                StartCharge();
+                OnChargeEvent(new ChargeTriggeredEventArgs(ChargeStates.Charging));
+            }
+            else if (e.Current > 0 && e.Current <= 5)
+            {
+                StopCharge();
+                OnChargeEvent(new ChargeTriggeredEventArgs(ChargeStates.FullyCharged));
+            }
+            if (e.Current > 500)
+            {
+                OnChargeEvent(new ChargeTriggeredEventArgs(ChargeStates.Error));
+            }
         }
         public bool IsConnected()
         {
-            return true;
+            if (usb.Connected == true)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public void StartCharge()
         {
-            throw new NotImplementedException();
+            usb.StartCharge();
         }
 
         public void StopCharge()
         {
-            throw new NotImplementedException();
+            usb.StopCharge();
+        }
+
+        protected virtual void OnChargeEvent(ChargeTriggeredEventArgs e)
+        {
+            EventHandler<ChargeTriggeredEventArgs> handler = RaisedChargeEvent;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
         }
     }
 }

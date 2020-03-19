@@ -8,12 +8,9 @@ namespace LadeskabCore.Door
 {
     public interface IDoor
     {
-        void Run();
+        void Lock();
 
-        void Lock(bool newstatus);
+        void Unlock();
 
-        void Unlock(bool newstatus);
-
-        event EventHandler<DoorTriggeredEventArgs> DoorChangedEvent;
     }
 }
