@@ -21,6 +21,8 @@ namespace LadeskabCore.StationControl
             DoorOpen
         };
 
+        public StationControl(){}
+
         public StationControl(RFIDReader.RFIDReader RFIDPub, ChargeControl.ChargeControl CHARGEPub, Door.Door DoorPub)
         {
             RFIDPub.RaiseDetectEvent += HandleDetectEventRFID;
@@ -28,17 +30,17 @@ namespace LadeskabCore.StationControl
             DoorPub.RaisedChargeEvent += HandleDetectEventDoor;
         }
 
-        private void HandleDetectEventDoor(object sender, EventArgs e)
+        public void HandleDetectEventDoor(object sender, EventArgs e)
         {
-
+            
         }
 
-        private void HandleDetectEventRFID(object sender, EventArgs e)
+        public void HandleDetectEventRFID(object sender, EventArgs e)
         { 
             CheckID(_oldID,e.ID);
         }
 
-        private void HandleDetectedEventCharge(object sender, EventArgs e)
+        public void HandleDetectedEventCharge(object sender, EventArgs e)
         {
             switch (e.state)
             {
@@ -145,7 +147,7 @@ namespace LadeskabCore.StationControl
 
         static void main(string[] args)
         {
-
+            Console.WriteLine("Hello");
         }
 
     }

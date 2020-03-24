@@ -52,9 +52,7 @@
     <Compile Include="Display\Display.cs" />
     <Compile Include="Display\IDisplay.cs" />
     <Compile Include="Door\IDoor.cs" />
-    <Compile Include="Door\DoorTriggeredEventArgs.cs" />
     <Compile Include="Door\Door.cs" />
-    <Compile Include="RFIDReader\RFIDDetectedEventArgs.cs" />
     <Compile Include="RFIDReader\RFIDReader.cs" />
     <Compile Include="RFIDReader\IRFIDReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
