@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LadeskabCore.RFIDReader
 {
@@ -12,6 +8,6 @@ namespace LadeskabCore.RFIDReader
         {
             ID = id_;
         }
-        public int ID { get; private set;}
+        public int ID { get; set;}
     }
 }

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LadeskabCore.RFIDReader
 {
@@ -22,7 +18,7 @@ namespace LadeskabCore.RFIDReader
             OnDetectEvent(new RFIDDetectedEventsArgs(id));
         }
 
-        protected virtual void OnDetectEvent(RFIDDetectedEventsArgs e)
+        public void OnDetectEvent(RFIDDetectedEventsArgs e)
         {
             EventHandler<RFIDDetectedEventsArgs> handler = RaiseDetectEvent;
             if(handler != null)

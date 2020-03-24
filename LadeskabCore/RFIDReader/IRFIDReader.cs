@@ -9,5 +9,6 @@ namespace LadeskabCore.RFIDReader
     public interface IRFIDReader
     {
         void ThreadRun();
+        void OnDetectEvent(RFIDDetectedEventsArgs e);
     }
 }
