@@ -28,6 +28,7 @@ namespace LadeskabCore.StationControl
             RFIDPub.RaiseDetectEvent += HandleDetectEventRFID;
             CHARGEPub.RaisedChargeEvent += HandleDetectedEventCharge;
             DoorPub.RaisedChargeEvent += HandleDetectEventDoor;
+            //:O
         }
 
         public void HandleDetectEventDoor(object sender, EventArgs e)
