@@ -15,10 +15,11 @@ namespace LadeskabCore.RFIDReader
             // This code receives a signal from a imaginary RFID-reader.
             // When this signal is passed we trigger our RFIDDetectedEvent.
             // Furthermore there is some id associated with the reader.
-            while (true)
-            {
-                OnDetectEvent(new RFIDDetectedEventsArgs(123));
-            }
+        }
+
+        public void RaiseRandomEvent(int id)
+        {
+            OnDetectEvent(new RFIDDetectedEventsArgs(id));
         }
 
         protected virtual void OnDetectEvent(RFIDDetectedEventsArgs e)

@@ -22,6 +22,7 @@ namespace LadeskabCore.LogFile
             try
             {
                 fs = File.Open(filePath, FileMode.Open, FileAccess.Write, FileShare.None);
+                fs.Seek(0, SeekOrigin.End);
                 Byte[] infoString = new UTF8Encoding(true).GetBytes(String.Format("RFID: {0} (LOCKED) @ {1}\n", id, DateTime.Now.ToString("HH:mm:ss")));
 
                 fs.Write(infoString, 0, infoString.Length);
@@ -38,6 +39,7 @@ namespace LadeskabCore.LogFile
             try
             {
                 fs = File.Open(filePath, FileMode.Open, FileAccess.Write, FileShare.None);
+                fs.Seek(0, SeekOrigin.End);
                 Byte[] infoString = new UTF8Encoding(true).GetBytes(String.Format("RFID: {0} (UNLOCKED) @ {1}\n", id, DateTime.Now.ToString("HH:mm:ss")));
 
                 fs.Write(infoString, 0, infoString.Length);

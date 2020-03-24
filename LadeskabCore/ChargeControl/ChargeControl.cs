@@ -28,12 +28,10 @@ namespace LadeskabCore.ChargeControl
             }
             if (e.Current <= 500 && e.Current > 5)
             {
-                StartCharge();
                 OnChargeEvent(new ChargeTriggeredEventArgs(ChargeStates.Charging));
             }
             else if (e.Current > 0 && e.Current <= 5)
             {
-                StopCharge();
                 OnChargeEvent(new ChargeTriggeredEventArgs(ChargeStates.FullyCharged));
             }
             if (e.Current > 500)
