@@ -4,7 +4,7 @@ using System.IO;
 
 namespace LadeskabCore.LogFile
 {
-    class LogFile : ILogFile
+    public class LogFile : ILogFile
     {
         private FileStream fs;
         private string filePath;

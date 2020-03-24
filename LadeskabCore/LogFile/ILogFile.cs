@@ -1,6 +1,6 @@
 ﻿namespace LadeskabCore
 {
-    interface ILogFile
+    public interface ILogFile
     {
         void LogDoorLocked(int id);
         void LogDoorUnlocked(int id);

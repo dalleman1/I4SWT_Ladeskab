@@ -107,7 +107,7 @@ namespace LadeskabCore.USBCharger
             _charging = false;
         }
 
-        protected virtual void OnNewCurrent()
+        public void OnNewCurrent()
         {
             CurrentValueEvent?.Invoke(this, new CurrentEventArgs() { Current = this.CurrentValue });
         }
