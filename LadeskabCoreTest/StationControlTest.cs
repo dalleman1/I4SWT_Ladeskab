@@ -3,6 +3,7 @@ using LadeskabCore.Display;
 using LadeskabCore.Door;
 using LadeskabCore.RFIDReader;
 using LadeskabCore.StationControl;
+using LadeskabCore.USBCharger;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -16,6 +17,7 @@ namespace LadeskabCoreTest
         private IChargeControl _chargeControl;
         private IDisplay _display;
         private IRFIDReader _reader;
+        private StationControl control;
 
         [SetUp]
         public void SetUp()
@@ -32,31 +34,16 @@ namespace LadeskabCoreTest
         [Test]
         public void IsConnected_Test_True()
         {
-            _chargeControl.IsConnected().Returns(true);
-            Assert.IsTrue(_stationControl.Isconnected());
+            _chargeControl.IsConnected().Equals(true);
+            Assert.That(_stationControl.Isconnected());
         }
 
         [Test]
         public void IsConnected_Test_False()
         {
-            _chargeControl.IsConnected().Returns(false);
-            Assert.That(_stationControl.Isconnected());
+            _chargeControl.IsConnected().Equals(false);
+            Assert.IsFalse(_stationControl.Isconnected().Equals(false));
         }
-
-        [Test]
-        public void ChargeMessage_Test_displayCorrect()
-        {
-            
-        }
-
-        [Test]
-        public void fuckyou()
-        {
-            _reader.OnDetectEvent() += Raise.EventWith(new RFIDDetectedEventsArgs() { ID = 123 });
-            Assert.That((_stationControl.));
-        }
-
-
 
     }
 }
