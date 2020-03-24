@@ -16,7 +16,7 @@ namespace LadeskabCore.ChargeControl
 
     public class ChargeTriggeredEventArgs : EventArgs
     {
-        private ChargeStates _chargeState { get; set; }
+        public ChargeStates _chargeState { get; private set; }
 
         public ChargeTriggeredEventArgs(ChargeStates state)
         {

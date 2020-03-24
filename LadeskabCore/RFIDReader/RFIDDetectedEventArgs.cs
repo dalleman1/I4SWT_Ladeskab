@@ -12,6 +12,6 @@ namespace LadeskabCore.RFIDReader
         {
             ID = id_;
         }
-        private int ID { get; }
+        public int ID { get; private set;}
     }
 }

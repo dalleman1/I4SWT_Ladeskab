@@ -1,4 +1,9 @@
-﻿using System;
+﻿using LadeskabCore.USBCharger;
+using LadeskabCore.RFIDReader;
+using LadeskabCore.Door;
+using LadeskabCore.LogFile;
+using LadeskabCore.ChargeControl;
+using System;
 using System.IO;
 using System.Reflection.Emit;
 using System.Runtime.InteropServices;
@@ -10,7 +15,7 @@ namespace LadeskabCore.StationControl
         public int _oldID { get; set; }
         public int _ID { get; set; }
         private CabinState _state;
-        readonly ChargeControl.ChargeControl charger = new ChargeControl.ChargeControl();
+        readonly ChargeControl.ChargeControl charger = new ChargeControl.ChargeControl(new UsbChargerSimulator());
         readonly Door.Door door = new Door.Door();
         readonly Display.Display display = new Display.Display();
 
@@ -27,34 +32,34 @@ namespace LadeskabCore.StationControl
         {
             RFIDPub.RaiseDetectEvent += HandleDetectEventRFID;
             CHARGEPub.RaisedChargeEvent += HandleDetectedEventCharge;
-            DoorPub.RaisedChargeEvent += HandleDetectEventDoor;
+            DoorPub.DoorChangedEvent += HandleDetectEventDoor;
             //:O
         }
 
-        public void HandleDetectEventDoor(object sender, EventArgs e)
+        public void HandleDetectEventDoor(object sender, DoorTriggeredEventArgs e)
         {
             
         }
 
-        public void HandleDetectEventRFID(object sender, EventArgs e)
+        public void HandleDetectEventRFID(object sender, RFIDDetectedEventsArgs e)
         { 
             CheckID(_oldID,e.ID);
         }
 
-        public void HandleDetectedEventCharge(object sender, EventArgs e)
+        public void HandleDetectedEventCharge(object sender, ChargeTriggeredEventArgs e)
         {
-            switch (e.state)
+            switch (e._chargeState)
             {
-                case Charging:
+                case ChargeStates.Charging:
                     display.Charging();
                     break;
-                case FullyCharged:
+                case ChargeStates.FullyCharged:
                     display.RemovePhone();
                     break;
-                case NoConnection:
+                case ChargeStates.NoConnection:
                     display.ConnectionError();
                     break;
-                case Error:
+                case ChargeStates.Error:
                     Console.WriteLine("Phone not connected, please reconnect.");
                     break;
                 default:

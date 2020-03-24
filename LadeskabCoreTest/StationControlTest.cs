@@ -39,8 +39,7 @@ namespace LadeskabCoreTest
         [Test]
         public void test()
         {
-            _stationControl.HandleDetectEventDoor +=
-                Raise.EventWith((new ))
+         
         }
 
     }

@@ -47,24 +47,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Door\IDoor.cs" />
+    <Compile Include="ChargeControl\ChargeControl.cs" />
+    <Compile Include="ChargeControl\ChargeTriggeredEventArgs.cs" />
+    <Compile Include="ChargeControl\IChargeControl.cs" />
+    <Compile Include="Display\Display.cs" />
+    <Compile Include="Display\IDisplay.cs" />
     <Compile Include="Door\DoorTriggeredEventArgs.cs" />
+    <Compile Include="Door\IDoor.cs" />
     <Compile Include="Door\Door.cs" />
+    <Compile Include="Charger\IUSBCharger.cs" />
     <Compile Include="LogFile\ILogFile.cs" />
     <Compile Include="LogFile\LogFile.cs" />
     <Compile Include="RFIDReader\RFIDDetectedEventArgs.cs" />
     <Compile Include="RFIDReader\RFIDReader.cs" />
     <Compile Include="RFIDReader\IRFIDReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StationControl\IStationControl.cs" />
+    <Compile Include="StationControl\StationControl.cs" />
+    <Compile Include="Charger\USBCharger.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ChargeControl\" />
-    <Folder Include="Display\" />
-    <Folder Include="StationControl\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
