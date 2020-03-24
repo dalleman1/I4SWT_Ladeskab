@@ -9,13 +9,14 @@ namespace LadeskabCore.ChargeControl
 {
     public class ChargeControl : IChargeControl
     {
-        UsbChargerSimulator usb = new UsbChargerSimulator();
+        IUsbCharger usb;
 
         public event EventHandler<ChargeTriggeredEventArgs> RaisedChargeEvent;
 
-        public ChargeControl(IUsbCharger usbCharger)
+        public ChargeControl()
         {
-            usbCharger.CurrentValueEvent += HandleChargeEvent;
+            usb = new UsbChargerSimulator();
+            usb.CurrentValueEvent += HandleChargeEvent;
         }
 
         public void HandleChargeEvent(object sender, CurrentEventArgs e)

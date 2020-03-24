@@ -15,9 +15,13 @@ namespace LadeskabCore.StationControl
         public int _oldID { get; set; }
         public int _ID { get; set; }
         private CabinState _state;
-        readonly ChargeControl.ChargeControl charger = new ChargeControl.ChargeControl(new UsbChargerSimulator());
-        readonly Door.Door door = new Door.Door();
+
         readonly Display.Display display = new Display.Display();
+
+        private RFIDReader.RFIDReader reader;
+        private ChargeControl.ChargeControl chargeControl;
+        private Door.Door door;
+        private LogFile.LogFile log;
 
         private enum CabinState
         {
@@ -26,19 +30,38 @@ namespace LadeskabCore.StationControl
             DoorOpen
         };
 
-        public StationControl(){}
-
-        public StationControl(RFIDReader.RFIDReader RFIDPub, ChargeControl.ChargeControl CHARGEPub, Door.Door DoorPub)
+        public StationControl()
         {
-            RFIDPub.RaiseDetectEvent += HandleDetectEventRFID;
-            CHARGEPub.RaisedChargeEvent += HandleDetectedEventCharge;
-            DoorPub.DoorChangedEvent += HandleDetectEventDoor;
-            //:O
+            reader = new RFIDReader.RFIDReader();
+            chargeControl = new ChargeControl.ChargeControl();
+            door = new Door.Door();
+            log = new LogFile.LogFile(@"temp.txt");
+
+            // Subscribe to event
+            reader.RaiseDetectEvent += HandleDetectEventRFID;
+            chargeControl.RaisedChargeEvent += HandleDetectedEventCharge;
+            door.DoorChangedEvent += HandleDetectEventDoor;
         }
 
+        
         public void HandleDetectEventDoor(object sender, DoorTriggeredEventArgs e)
         {
-            
+            switch(e._doorstate)
+            {
+                case DoorStates.DoorLocked:
+                    {
+                        display.Charging();
+                    } break;
+                case DoorStates.DoorUnlocked:
+                    {
+                        if(!Isconnected())
+                        {
+                            display.ConnectPhone();
+                        }
+                    } break;
+                default:
+                    break;
+            }
         }
 
         public void HandleDetectEventRFID(object sender, RFIDDetectedEventsArgs e)
@@ -67,16 +90,23 @@ namespace LadeskabCore.StationControl
             }
         }
 
+        
         public bool Isconnected()
         {
-            if (charger.IsConnected() == true)
+            if (chargeControl.IsConnected() == true)
             {
                 return true;
             }
             else
             {
                 return false;
-            }
+            }         
+        }
+
+        public void StartCharge()
+        {
+            door.Lock();
+            log.LogDoorLocked(123);
         }
 
         public void CheckID(int oldID, int ID)
@@ -90,13 +120,10 @@ namespace LadeskabCore.StationControl
                     // Check for cabin connection
                     if (Isconnected())
                     {
-                        UnlockDoor();
+                        door.Unlock();
                         display.ConnectPhone();
                         _oldID = ID;
-                        using (var writer = File.AppendText("logFile")) //Replace "logFile" with actual Logfile class 
-                        {
-                            writer.WriteLine(DateTime.Now + ": Cabin locked with RFID: {0}", ID);
-                        }
+   
                         display.Charging();
                         _state = CabinState.Locked;
                     }
@@ -115,12 +142,8 @@ namespace LadeskabCore.StationControl
                     // Check for correct ID
                     if (ID == _oldID)
                     {
-                        charger.StopCharge();
+                        chargeControl.StopCharge();
                         door.Unlock();
-                        using (var writer = File.AppendText("logFile")) //Replace "logFile" with actual Logfile class 
-                        {
-                            writer.WriteLine(DateTime.Now + ": cabin unlocked with RFID: {0}", ID);
-                        }
 
                         display.RemovePhone();
                         _state = CabinState.Available;
@@ -139,8 +162,6 @@ namespace LadeskabCore.StationControl
             display.Charging();
         }
 
-        
-
         public void LockDoor()
         {
             door.Lock();
@@ -150,11 +171,5 @@ namespace LadeskabCore.StationControl
         {
             door.Unlock();
         }
-
-        static void main(string[] args)
-        {
-            Console.WriteLine("Hello");
-        }
-
     }
 }

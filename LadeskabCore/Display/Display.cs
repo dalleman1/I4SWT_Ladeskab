@@ -4,12 +4,9 @@ namespace LadeskabCore.Display
 {
     public class Display : IDisplay
     {
-        StationControl.StationControl control = new StationControl.StationControl(); //Instance of StationControl.
-
         public void ConnectPhone()
         {
-            if(control.Isconnected() != true) //checks wether stationcontrol is connected or not
-                Console.WriteLine("Please connect your phone to the charging cabin.\n");
+           Console.WriteLine("Please connect your phone to the charging cabin.\n");
         }
 
         public void RemovePhone()
@@ -34,7 +31,7 @@ namespace LadeskabCore.Display
 
         public void Charging()
         {
-            Console.WriteLine("User: " + control._ID + "'s phone is currently charging. To unlock, use RFID tag.\n");
+            Console.WriteLine("Phone is currently charging. To unlock, use RFID tag.\n");
         }
 
     }

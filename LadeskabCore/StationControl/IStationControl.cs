@@ -10,6 +10,7 @@ namespace LadeskabCore.StationControl
         bool Isconnected();
         void CheckID(int oldID, int ID);
         void ChargeMessage();
+        void StartCharge();
         void LockDoor();
         void UnlockDoor();
         void HandleDetectEventRFID(object sender, RFIDDetectedEventsArgs e);

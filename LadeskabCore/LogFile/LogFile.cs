@@ -14,6 +14,8 @@ namespace LadeskabCore.LogFile
         public LogFile(string filePath_)
         {
             filePath = filePath_;
+            fs = File.Create(filePath);
+            fs.Close();
         } 
         public void LogDoorLocked(int id)
         {
