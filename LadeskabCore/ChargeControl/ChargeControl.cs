@@ -9,7 +9,7 @@ namespace LadeskabCore.ChargeControl
 {
     public class ChargeControl : IChargeControl
     {
-        IUsbCharger usb;
+        public IUsbCharger usb;
 
         public event EventHandler<ChargeTriggeredEventArgs> RaisedChargeEvent;
 
@@ -24,7 +24,6 @@ namespace LadeskabCore.ChargeControl
             if (e.Current == 0)
             {
                 OnChargeEvent(new ChargeTriggeredEventArgs(ChargeStates.NoConnection));
-
             }
             if (e.Current <= 500 && e.Current > 5)
             {
