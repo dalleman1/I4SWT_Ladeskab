@@ -146,7 +146,6 @@ namespace LadeskabCore.StationControl
                         chargeControl.StopCharge();
                         door.Unlock();
                         log.LogDoorUnlocked(_ID);
-                        display.RemovePhone();
                         _state = CabinState.Available;
                     }
                     else
