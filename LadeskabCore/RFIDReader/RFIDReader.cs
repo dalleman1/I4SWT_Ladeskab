@@ -20,11 +20,7 @@ namespace LadeskabCore.RFIDReader
 
         public void OnDetectEvent(RFIDDetectedEventsArgs e)
         {
-            EventHandler<RFIDDetectedEventsArgs> handler = RaiseDetectEvent;
-            if(handler != null)
-            {
-                handler(this, e);
-            }
+            RaiseDetectEvent?.Invoke(this, e);
         }
     }
 }

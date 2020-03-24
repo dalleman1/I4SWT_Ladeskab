@@ -1,5 +1,4 @@
-﻿using System;
-using LadeskabCore.RFIDReader;
+﻿using LadeskabCore.RFIDReader;
 using LadeskabCore.Door;
 using LadeskabCore.ChargeControl;
 

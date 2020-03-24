@@ -7,6 +7,7 @@ using System;
 using System.IO;
 using System.Reflection.Emit;
 using System.Runtime.InteropServices;
+using LadeskabCore.Display;
 
 namespace LadeskabCore.StationControl
 {
@@ -16,12 +17,11 @@ namespace LadeskabCore.StationControl
         public int _ID { get; set; }
         private CabinState _state;
 
-        readonly Display.Display display = new Display.Display();
-
-        private RFIDReader.RFIDReader reader;
-        private ChargeControl.ChargeControl chargeControl;
-        private Door.Door door;
-        private LogFile.LogFile log;
+        private IDisplay display;
+        private IRFIDReader reader;
+        private IChargeControl chargeControl;
+        private IDoor door;
+        private ILogFile log;
 
         private enum CabinState
         {
@@ -36,6 +36,7 @@ namespace LadeskabCore.StationControl
             chargeControl = new ChargeControl.ChargeControl();
             door = new Door.Door();
             log = new LogFile.LogFile(@"temp.txt");
+            display = new Display.Display();
 
             // Subscribe to event
             reader.RaiseDetectEvent += HandleDetectEventRFID;

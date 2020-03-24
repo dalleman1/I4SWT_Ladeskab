@@ -13,37 +13,34 @@ namespace LadeskabCoreTest
     [TestFixture]
     public class StationControlTest
     {
-        private IStationControl _stationControl;
         private IDoor _door;
         private IChargeControl _chargeControl;
         private IDisplay _display;
         private IRFIDReader _reader;
-        private StationControl control;
+        private StationControl control = new StationControl();
 
         [SetUp]
         public void SetUp()
         {
-            _stationControl = Substitute.For<IStationControl>();
-            _door = Substitute.For<IDoor>();
+            _door = Substitute.For<Door>();
             _chargeControl = Substitute.For<IChargeControl>();
-            _display = Substitute.For<IDisplay>();
+            _display = Substitute.For<Display>();
             _reader = Substitute.For<IRFIDReader>();
 
-            _stationControl = new StationControl();
         }
 
         [Test]
         public void IsConnected_Test_True()
         {
             _chargeControl.IsConnected().Equals(true);
-            Assert.That(_stationControl.Isconnected());
+            Assert.That(control.Isconnected());
         }
 
         [Test]
         public void IsConnected_Test_False()
         {
             _chargeControl.IsConnected().Equals(false);
-            Assert.IsFalse(_stationControl.Isconnected().Equals(false));
+            Assert.IsFalse(control.Isconnected().Equals(false));
         }
 
         [Test]
@@ -100,6 +97,28 @@ namespace LadeskabCoreTest
 
             Assert.That(receivedEvents[1].Item1, Is.EqualTo(ChargeStates.NoConnection));
             Assert.That(receivedEvents[1].Item2, Is.LessThan(System.Convert.ToDouble(500)));
+        }
+
+        [Test]
+        public void ChargeMessage_Test_ChargingCalled()
+        {
+            control.ChargeMessage();
+            _display.Received(1).Charging();
+
+        }
+
+        [Test]
+        public void LockDoor_Test_LockCalled()
+        {
+            control.LockDoor();
+            _door.Received(1).Lock();
+        }
+
+        [Test]
+        public void UnlockDoor_Test_LockCalled()
+        {
+            control.UnlockDoor();
+            _door.Received(1).Unlock();
         }
     }
 }

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using LadeskabCore.USBCharger;
 
 namespace LadeskabCore.ChargeControl
@@ -60,7 +56,7 @@ namespace LadeskabCore.ChargeControl
             usb.StopCharge();
         }
 
-        protected virtual void OnChargeEvent(ChargeTriggeredEventArgs e)
+        public void OnChargeEvent(ChargeTriggeredEventArgs e)
         {
             EventHandler<ChargeTriggeredEventArgs> handler = RaisedChargeEvent;
             if (handler != null)

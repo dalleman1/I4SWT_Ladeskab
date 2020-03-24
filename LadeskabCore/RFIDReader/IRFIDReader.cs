@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LadeskabCore.RFIDReader
 {
@@ -10,5 +6,7 @@ namespace LadeskabCore.RFIDReader
     {
         void ThreadRun();
         void OnDetectEvent(RFIDDetectedEventsArgs e);
+        void RaiseRandomEvent(int id);
+        event EventHandler<RFIDDetectedEventsArgs> RaiseDetectEvent;
     }
 }

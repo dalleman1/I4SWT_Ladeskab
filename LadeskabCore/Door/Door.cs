@@ -21,7 +21,7 @@ namespace LadeskabCore.Door
             OnDoorEvent(new DoorTriggeredEventArgs(DoorStates.DoorUnlocked));
         }
 
-        protected virtual void OnDoorEvent(DoorTriggeredEventArgs e)
+        public void OnDoorEvent(DoorTriggeredEventArgs e)
         {
             EventHandler<DoorTriggeredEventArgs> handler = DoorChangedEvent;
             if (handler != null)

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LadeskabCore.ChargeControl
 {
@@ -17,7 +13,6 @@ namespace LadeskabCore.ChargeControl
     public class ChargeTriggeredEventArgs : EventArgs
     {
         public ChargeStates _chargeState { get; private set; }
-
         public ChargeTriggeredEventArgs(ChargeStates state)
         {
             _chargeState = state;

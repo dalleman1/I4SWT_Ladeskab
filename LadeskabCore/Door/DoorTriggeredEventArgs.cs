@@ -15,7 +15,6 @@ namespace LadeskabCore.Door
     public class DoorTriggeredEventArgs : EventArgs
     {
         public DoorStates _doorstate { get; private set; }
-
         public DoorTriggeredEventArgs(DoorStates state)
         {
             _doorstate = state;

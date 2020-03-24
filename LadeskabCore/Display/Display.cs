@@ -33,6 +33,5 @@ namespace LadeskabCore.Display
         {
             Console.WriteLine("Phone is currently charging. To unlock, use RFID tag.\n");
         }
-
     }
 }
