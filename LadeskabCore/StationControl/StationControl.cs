@@ -78,11 +78,12 @@ namespace LadeskabCore.StationControl
                     display.Charging();
                     break;
                 case ChargeStates.FullyCharged:
-                    reader.RaiseRandomEvent(123);
                     display.RemovePhone();
+                    reader.RaiseRandomEvent(123);
                     break;
                 case ChargeStates.NoConnection:
-                    display.ConnectionError();
+                    Console.WriteLine("No phone is curently connected.\n");
+                    display.ConnectPhone();
                     break;
                 case ChargeStates.Error:
                     Console.WriteLine("Phone not connected, please reconnect.");
@@ -123,7 +124,6 @@ namespace LadeskabCore.StationControl
                     {
                         door.Unlock();
                         log.LogDoorLocked(_ID);
-                        display.ConnectPhone();
                         _oldID = ID;
                         chargeControl.StartCharge();
                         display.Charging();
@@ -131,7 +131,7 @@ namespace LadeskabCore.StationControl
                     }
                     else
                     {
-                        display.ConnectionError();
+                        display.ConnectPhone();
                     }
 
                     break;
