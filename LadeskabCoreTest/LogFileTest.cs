@@ -5,76 +5,58 @@ using LadeskabCore;
 using NSubstitute;
 using NUnit.Framework;
 using LadeskabCore.LogFile;
+using System.Collections.Generic;
 
 namespace LadeskabCoreTest
 {
     [TestFixture]
     public class LogFileTest
     {
-        private ILogFile _logFile;
 
-        [SetUp]
-        public void SetUp()
+        [Test]
+        public void fileCreation_Test()
         {
-            _logFile = Substitute.For<ILogFile>();
+            string filePath = @"test.txt";
+
+            File.Delete(filePath); // Make sure the file wasn't there before the constructor call
+            ILogFile logFile = new LogFile(filePath);
+
+            Assert.True(File.Exists(filePath));
         }
 
-    //    [Test]
-    //    public void LogDoorLocked_Test_Called()
-    //    {
-    //        var mockFileSystem = new MockFileSystem();
+        [Test]
+        public void LogDoorLocked_Test()
+        {
+            string filePath = @"test.txt";
+            string time;
 
-    //        var mockInputFile = new MockFileData("line1\nline2\nline3");
+            IEnumerable<string> lines;
+            ILogFile logFile = new LogFile(filePath);
 
-    //        mockFileSystem.AddFile(@"D:\Repo\test.txt", mockInputFile);
+            time = logFile.LogDoorLocked(123);
+            lines = File.ReadLines(filePath);
 
-    //        var sut = new FileProcessorTestable(mockFileSystem);
-    //        sut.ConvertFirstLineToUpper(@"D:\Repo\test.txt");
+            foreach(var l in lines) {
+                Assert.AreEqual(string.Format("RFID: 123 (LOCKED) @ {0}", time), l);
+            }
+        }
 
-    //        MockFileData mockOutputFile = mockFileSystem.GetFile(@"D:\Repo\test.txt");
+        [Test]
+        public void LogDoorUnlocked_Test()
+        {
+            string filePath = @"test.txt";
+            string time;
 
-    //        string[] outputLines = mockOutputFile.TextContents.Split();
+            IEnumerable<string> lines;
+            ILogFile logFile = new LogFile(filePath);
 
-    //        Assert.Equals("LINE1", outputLines[0]);
-    //        Assert.Equals("line2", outputLines[1]);
-    //        Assert.Equals("line3", outputLines[2]);
-       }
+            time = logFile.LogDoorUnlocked(123);
+            lines = File.ReadLines(filePath);
 
-    //}
-    //public class FileProcessorTestable
-    //{
-    //    private readonly IFileSystem _fileSystem;
-
-    //    public FileProcessorTestable() : this(new FileSystem()) { }
-
-    //    public FileProcessorTestable(IFileSystem fileSystem)
-    //    {
-    //        _fileSystem = fileSystem;
-    //    }
-
-    //    public void ConvertFirstLineToUpper(string inputFilePath)
-    //    {
-    //        string outputFilePath = Path.ChangeExtension(inputFilePath, ".out.txt");
-
-    //        using (StreamReader inputReader = _fileSystem.File.OpenText(inputFilePath))
-    //        using (StreamWriter outputWriter = _fileSystem.File.CreateText(outputFilePath))
-    //        {
-    //            bool isFirstLine = true;
-
-    //            while (!inputReader.EndOfStream)
-    //            {
-    //                string line = inputReader.ReadLine();
-
-    //                if (isFirstLine)
-    //                {
-    //                    line = line.ToUpperInvariant();
-    //                    isFirstLine = false;
-    //                }
-
-    //                outputWriter.WriteLine(line);
-    //            }
-    //        }
-    //    }
-    //}
-
+            foreach (var l in lines)
+            {
+                Assert.AreEqual(string.Format("RFID: 123 (UNLOCKED) @ {0}", time), l);
+            }
+        }
+    }
 }

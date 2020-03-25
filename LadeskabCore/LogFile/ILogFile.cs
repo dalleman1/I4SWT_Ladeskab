@@ -2,7 +2,7 @@
 {
     public interface ILogFile
     {
-        void LogDoorLocked(int id);
-        void LogDoorUnlocked(int id);
+        string LogDoorLocked(int id);
+        string LogDoorUnlocked(int id);
     }
 }
