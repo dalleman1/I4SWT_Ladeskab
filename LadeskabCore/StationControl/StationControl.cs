@@ -40,7 +40,7 @@ namespace LadeskabCore.StationControl
 
             // Subscribe to event
             reader.RaiseDetectEvent += HandleDetectEventRFID;
-            chargeControl.RaisedChargeEvent += HandleDetectedEventCharge;
+            chargeControl.RaisedChargeEvent += HandleDetectEventCharge;
             door.DoorChangedEvent += HandleDetectEventDoor;
         }
 
@@ -70,7 +70,7 @@ namespace LadeskabCore.StationControl
             CheckID(_oldID,e.ID);
         }
 
-        public void HandleDetectedEventCharge(object sender, ChargeTriggeredEventArgs e)
+        public void HandleDetectEventCharge(object sender, ChargeTriggeredEventArgs e)
         {
             switch (e._chargeState)
             {

@@ -14,7 +14,7 @@ namespace LadeskabCore.StationControl
         void UnlockDoor();
         void HandleDetectEventRFID(object sender, RFIDDetectedEventsArgs e);
         void HandleDetectEventDoor(object sender, DoorTriggeredEventArgs e);
-        void HandleDetectedEventCharge(object sender, ChargeTriggeredEventArgs e);
+        void HandleDetectEventCharge(object sender, ChargeTriggeredEventArgs e);
     }
 
 }

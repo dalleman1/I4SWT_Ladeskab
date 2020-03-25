@@ -51,6 +51,7 @@
     <Compile Include="ChargeControl\ChargeControl.cs" />
     <Compile Include="ChargeControl\ChargeTriggeredEventArgs.cs" />
     <Compile Include="ChargeControl\IChargeControl.cs" />
+    <Compile Include="Charger\CurrentEventArgs.cs" />
     <Compile Include="Display\Display.cs" />
     <Compile Include="Display\IDisplay.cs" />
     <Compile Include="Door\DoorTriggeredEventArgs.cs" />
