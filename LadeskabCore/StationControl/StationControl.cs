@@ -51,7 +51,7 @@ namespace LadeskabCore.StationControl
             {
                 case DoorStates.DoorLocked:
                     {
-                        display.Charging();
+
                     } break;
                 case DoorStates.DoorUnlocked:
                     {
@@ -75,7 +75,7 @@ namespace LadeskabCore.StationControl
             switch (e._chargeState)
             {
                 case ChargeStates.Charging:
-                    display.Charging();
+                    ChargeMessage();
                     break;
                 case ChargeStates.FullyCharged:
                     display.RemovePhone();
@@ -122,11 +122,10 @@ namespace LadeskabCore.StationControl
                     // Check for cabin connection
                     if (Isconnected())
                     {
-                        door.Unlock();
-                        log.LogDoorLocked(_ID);
                         _oldID = ID;
+                        log.LogDoorLocked(_ID);
+                        LockDoor();
                         chargeControl.StartCharge();
-                        display.Charging();
                         _state = CabinState.Locked;
                     }
                     else
@@ -144,9 +143,9 @@ namespace LadeskabCore.StationControl
                     // Check for correct ID
                     if (ID == _oldID)
                     {
-                        chargeControl.StopCharge();
-                        door.Unlock();
+                        UnlockDoor();
                         log.LogDoorUnlocked(_ID);
+                        chargeControl.StopCharge();
                         _state = CabinState.Available;
                     }
                     else
@@ -165,11 +164,13 @@ namespace LadeskabCore.StationControl
 
         public void LockDoor()
         {
+            display.InsertRFID();
             door.Lock();
         }
 
         public void UnlockDoor()
         {
+            display.InsertRFID();
             door.Unlock();
         }
     }
