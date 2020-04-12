@@ -15,7 +15,7 @@ namespace LadeskabCore.StationControl
     {
         public int _oldID { get; set; }
         public int _ID { get; set; }
-        private CabinState _state;
+        private CabinState _state { get; set; }
 
         private IDisplay display;
         private IRFIDReader reader;
@@ -23,7 +23,7 @@ namespace LadeskabCore.StationControl
         private IDoor door;
         private ILogFile log;
 
-        private enum CabinState
+        public enum CabinState
         {
             Available,
             Locked,
@@ -108,6 +108,16 @@ namespace LadeskabCore.StationControl
         public void StartCharge()
         {
             reader.RaiseRandomEvent(123);
+        }
+
+        public void SetCabinState(CabinState state)
+        {
+            _state = state;
+        }
+
+        public CabinState GetCabinState()
+        {
+            return _state;
         }
 
         public void CheckID(int oldID, int ID)

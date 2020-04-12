@@ -2,6 +2,9 @@
 using LadeskabCore.USBCharger;
 using NSubstitute;
 using NUnit.Framework;
+using System.Collections.Generic;
+using System.Reflection;
+using System.Threading;
 
 namespace LadeskabCoreTest
 {
@@ -46,7 +49,24 @@ namespace LadeskabCoreTest
             Assert.IsFalse(_chargeControl.IsConnected().Equals(false));
         }
 
+        // Test that our class does indeed fire an event
+        [Test]
+        public void HandleChargeEvent_Test()
+        {
+            bool ChargeControlUpdated = false;
+            ManualResetEvent ChargeControlUpdatedEvent = new ManualResetEvent(false);
 
+            _chargeControl.RaisedChargeEvent += delegate
+            {
+                ChargeControlUpdated = true;
+                ChargeControlUpdatedEvent.Set();
+            };
 
+            _chargeControl.StartCharge();
+
+            ChargeControlUpdatedEvent.WaitOne(5000, false);
+
+            Assert.IsTrue(ChargeControlUpdated);
+        }
     }
 }

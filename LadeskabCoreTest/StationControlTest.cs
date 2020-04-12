@@ -7,6 +7,7 @@ using LadeskabCore.USBCharger;
 using System.Collections.Generic;
 using NSubstitute;
 using NUnit.Framework;
+using System.Threading;
 
 namespace LadeskabCoreTest
 {
@@ -119,6 +120,60 @@ namespace LadeskabCoreTest
         {
             control.UnlockDoor();
             _door.Received(1).Unlock();
+        }
+
+        [Test]
+        public void StartCharge_Test()
+        {
+            control.StartCharge(); // This raises an event that sets ID to 123.
+            Assert.IsTrue(control._ID == 123);
+        }
+
+        [Test]
+        public void CheckID_Set_Test()
+        {
+            control.CheckID(123, 123);
+
+            Assert.IsTrue(control._ID == 1 || control._oldID == 123);
+        }
+
+        [Test]
+        public void CheckID_Available_Test()
+        {
+            control.SetCabinState(StationControl.CabinState.Available);
+            control.CheckID(123, 123);
+            Assert.IsTrue(control.GetCabinState() == StationControl.CabinState.Locked);
+        }
+
+        [Test]
+        public void CheckID_DoorOpen_Test()
+        {
+            control.SetCabinState(StationControl.CabinState.DoorOpen);
+            control.CheckID(123, 123);
+            Assert.IsTrue(control.GetCabinState() == StationControl.CabinState.DoorOpen);
+        }
+
+        [Test]
+        public void CheckID_Locked_Error_Test()
+        {
+            control.SetCabinState(StationControl.CabinState.Locked);
+            control.CheckID(123, 100);
+            Assert.IsTrue(control.GetCabinState() == StationControl.CabinState.Locked);
+        }
+        [Test]
+        public void CheckID_Locked_NotError_Test()
+        {
+            control.SetCabinState(StationControl.CabinState.Locked);
+            control.CheckID(123, 123);
+            Assert.IsTrue(control.GetCabinState() == StationControl.CabinState.Available);
+        }
+
+        [Test]
+        public void SetCabinState_Test()
+        {
+            control.SetCabinState(StationControl.CabinState.Locked);
+
+            Assert.That(control.GetCabinState() == StationControl.CabinState.Locked);
         }
     }
 }
