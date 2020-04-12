@@ -51,7 +51,7 @@ namespace LadeskabCore.StationControl
             {
                 case DoorStates.DoorLocked:
                     {
-
+                        display.Charging();
                     } break;
                 case DoorStates.DoorUnlocked:
                     {

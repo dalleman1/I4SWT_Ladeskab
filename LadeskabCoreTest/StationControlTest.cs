@@ -105,7 +105,6 @@ namespace LadeskabCoreTest
         {
             control.ChargeMessage();
             _display.Received(1).Charging();
-
         }
 
         [Test]
