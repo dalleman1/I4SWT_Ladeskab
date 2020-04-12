@@ -38,15 +38,18 @@ namespace LadeskabCoreTest
         [Test]
         public void usbConnected_Test_IsTrue()
         {
-            _usbCharger.Connected.Equals(true);
-            Assert.That(_chargeControl.IsConnected());
+            ChargeControl chargeControl = new ChargeControl(); // Usb is connected in constructor
+
+            Assert.IsTrue(chargeControl.IsConnected() == true);
         }
 
         [Test]
         public void usbConnected_Test_IsFalse()
         {
-            _usbCharger.Connected.Equals(false);
-            Assert.IsFalse(_chargeControl.IsConnected().Equals(false));
+            ChargeControl chargeControl = new ChargeControl();
+            chargeControl.usb.SimulateConnected(false);
+
+            Assert.IsTrue(chargeControl.IsConnected() == false);
         }
 
         // Test that our class does indeed fire an event
