@@ -189,7 +189,7 @@ namespace LadeskabCoreTest
         public void HandleDetectEventCharge_Error_Test()
         {
             // When this handler receives the FullyCharged event, it triggers the CheckID function.
-            // Effectively setting the _ID of the controller to 123...
+            // Effectively setting the _ID of the controller to 123....
             control.HandleDetectEventCharge(null, new ChargeTriggeredEventArgs(ChargeStates.Error));
 
             Assert.That(control._ID == 123); // Our raise event always sends 123.
