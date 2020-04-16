@@ -174,5 +174,25 @@ namespace LadeskabCoreTest
 
             Assert.That(control.GetCabinState() == StationControl.CabinState.Locked);
         }
+
+        [Test]
+        public void HandleDetectEventCharge_FullyChared_Test()
+        { 
+            // When this handler receives the FullyCharged event, it triggers the CheckID function.
+            // Effectively setting the _ID of the controller to 123.
+            control.HandleDetectEventCharge(null, new ChargeTriggeredEventArgs(ChargeStates.FullyCharged));
+
+            Assert.That(control._ID == 123); // Our raise event always sends 123.
+        }
+
+        [Test]
+        public void HandleDetectEventCharge_Error_Test()
+        {
+            // When this handler receives the FullyCharged event, it triggers the CheckID function.
+            // Effectively setting the _ID of the controller to 123.
+            control.HandleDetectEventCharge(null, new ChargeTriggeredEventArgs(ChargeStates.Error));
+
+            Assert.That(control._ID == 123); // Our raise event always sends 123.
+        }
     }
 }
