@@ -194,5 +194,11 @@ namespace LadeskabCoreTest
 
             Assert.That(control._ID == 123); // Our raise event always sends 123.
         }
+
+        [Test]
+        public void SomeRandomTest()
+        {
+            Assert.That(true == true);
+        }
     }
 }
