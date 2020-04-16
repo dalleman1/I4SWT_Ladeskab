@@ -171,7 +171,7 @@ namespace LadeskabCoreTest
         public void SetCabinState_Test()
         {
             control.SetCabinState(StationControl.CabinState.Locked);
-
+            //Meme
             Assert.That(control.GetCabinState() == StationControl.CabinState.Locked);
         }
 
